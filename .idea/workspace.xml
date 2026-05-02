@@ -10,6 +10,9 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -34,6 +37,7 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "git-widget-placeholder": "master",
     "last_opened_file_path": "D:/Programming/project-ms",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -44,6 +48,7 @@
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "D:\\Programming\\project-ms\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -63,7 +68,7 @@
       <option name="presentableId" value="Default" />
       <updated>1777695893272</updated>
       <workItem from="1777695895312" duration="50000" />
-      <workItem from="1777695958884" duration="9574000" />
+      <workItem from="1777695958884" duration="19697000" />
     </task>
     <servers />
   </component>

@@ -7,9 +7,9 @@ import { useAppContext } from '@/context/AppContext';
 import movies from '@/data/movies';
 import MovieGrid from './MovieGrid';
 
-const tabs: { key: MarkStatus; label: string }[] = [
-  { key: 'want_to_watch', label: '想看' },
-  { key: 'watching', label: '正在看' },
+const tabs: { key: MarkStatus; label: string; color: string }[] = [
+  { key: 'want_to_watch', label: '想看', color: 'var(--color-want-watch)' },
+  { key: 'watching', label: '正在看', color: 'var(--color-watching)' },
 ];
 
 export default function ProfileView() {
@@ -40,8 +40,8 @@ export default function ProfileView() {
               cursor: 'pointer',
               fontSize: '14px',
               fontWeight: activeTab === tab.key ? 600 : 400,
-              color: activeTab === tab.key ? 'var(--color-gold)' : 'var(--color-text-dim)',
-              backgroundColor: activeTab === tab.key ? 'rgba(212,175,55,0.1)' : 'transparent',
+              color: activeTab === tab.key ? tab.color : 'var(--color-text-dim)',
+              backgroundColor: activeTab === tab.key ? `${tab.color}22` : 'transparent',
               transition: 'all 200ms ease',
             }}
           >
@@ -51,7 +51,7 @@ export default function ProfileView() {
               padding: '2px 8px',
               borderRadius: '10px',
               fontSize: '12px',
-              backgroundColor: activeTab === tab.key ? 'var(--color-gold)' : 'var(--color-border)',
+              backgroundColor: activeTab === tab.key ? tab.color : 'var(--color-border)',
               color: activeTab === tab.key ? '#000' : 'var(--color-text-dim)',
             }}>
               {getMarkedMovies(tab.key).length}

@@ -9,9 +9,9 @@ interface MovieCardProps {
   movie: Movie;
 }
 
-const statusConfig: Record<MarkStatus, { label: string; icon: string }> = {
-  want_to_watch: { label: '想看', icon: '👁' },
-  watching: { label: '正在看', icon: '▶' },
+const statusConfig: Record<MarkStatus, { label: string; icon: string; color: string }> = {
+  want_to_watch: { label: '想看', icon: '👁', color: 'var(--color-want-watch)' },
+  watching: { label: '正在看', icon: '▶', color: 'var(--color-watching)' },
 };
 
 const GENRE_STYLES: Record<string, { text: string; bg: string; border: string }> = {
@@ -35,6 +35,7 @@ export default function MovieCard({ movie }: MovieCardProps) {
   const { toggleMark, getMarkStatus } = useAppContext();
   const currentStatus = getMarkStatus(movie.id);
   const hasMark = currentStatus !== null;
+  const markColor = currentStatus ? statusConfig[currentStatus].color : null;
 
   // 点击外部关闭下拉
   useEffect(() => {
@@ -68,27 +69,35 @@ export default function MovieCard({ movie }: MovieCardProps) {
         aspectRatio: '2/3',
         overflow: 'hidden',
         borderRadius: 'var(--radius-card) var(--radius-card) 0 0',
+        backgroundColor: 'var(--color-surface)',
       }}>
+        {/* 海报图片 */}
+        <img
+          src={movie.poster}
+          alt={movie.titleZh}
+          loading="lazy"
+          style={{
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            transition: 'filter 350ms ease, transform 350ms ease',
+            filter: hovered ? 'blur(4px) brightness(0.3)' : 'none',
+            transform: hovered ? 'scale(1.05)' : 'scale(1)',
+          }}
+        />
+        {/* 标题覆盖层（图片加载失败或悬停时可见） */}
         <div style={{
           position: 'absolute',
           inset: 0,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          background: (() => {
-            const primaryGenre = movie.genre[0];
-            const style = GENRE_STYLES[primaryGenre];
-            const accent = style?.text ?? 'var(--color-gold)';
-            return `linear-gradient(135deg, ${accent}22 0%, ${accent}44 40%, ${accent}11 100%)`;
-          })(),
-          borderBottom: `2px solid ${(() => {
-            const primaryGenre = movie.genre[0];
-            const style = GENRE_STYLES[primaryGenre];
-            return style?.text ?? 'var(--color-gold)';
-          })()}33`,
-          transition: 'filter 350ms ease, transform 350ms ease',
-          filter: hovered ? 'blur(6px) brightness(0.35)' : 'none',
-          transform: hovered ? 'scale(1.05)' : 'scale(1)',
+          background: hovered
+            ? 'rgba(0,0,0,0.35)'
+            : 'rgba(0,0,0,0.15)',
+          transition: 'background 350ms ease',
         }}>
           <h2 style={{
             color: '#fff',
@@ -97,9 +106,12 @@ export default function MovieCard({ movie }: MovieCardProps) {
             textAlign: 'center',
             padding: '16px',
             fontFamily: 'var(--font-zh-title)',
-            textShadow: '0 2px 12px rgba(0,0,0,0.6)',
+            textShadow: '0 2px 12px rgba(0,0,0,0.8)',
             lineHeight: 1.6,
             letterSpacing: '2px',
+            opacity: hovered ? 1 : 0,
+            transform: hovered ? 'translateY(0)' : 'translateY(4px)',
+            transition: 'opacity 350ms ease, transform 350ms ease',
           }}>
             {movie.titleZh}
           </h2>
@@ -149,10 +161,10 @@ export default function MovieCard({ movie }: MovieCardProps) {
             height: '34px',
             borderRadius: '8px',
             border: hasMark
-              ? '1.5px solid var(--color-gold)'
+              ? `1.5px solid ${markColor}`
               : '1.5px solid rgba(255,255,255,0.2)',
             backgroundColor: hasMark
-              ? 'rgba(212,175,55,0.2)'
+              ? `${markColor}33`
               : 'rgba(0,0,0,0.5)',
             cursor: 'pointer',
             display: 'flex',
@@ -161,15 +173,15 @@ export default function MovieCard({ movie }: MovieCardProps) {
             backdropFilter: 'blur(8px)',
             transition: 'all 250ms ease',
             boxShadow: hasMark
-              ? '0 0 12px rgba(212,175,55,0.4)'
+              ? `0 0 12px ${markColor}66`
               : 'none',
             transform: hovered ? 'scale(1.08)' : 'scale(1)',
           }}
           aria-label="标记电影"
         >
           <svg width="15" height="15" viewBox="0 0 16 16"
-            fill={hasMark ? 'var(--color-gold)' : 'none'}
-            stroke={hasMark ? 'var(--color-gold)' : 'rgba(255,255,255,0.7)'}
+            fill={hasMark ? markColor : 'none'}
+            stroke={hasMark ? markColor : 'rgba(255,255,255,0.7)'}
             strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
             <path d="M3 2v12l5-3.5L13 14V2a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1z" />
           </svg>
@@ -210,13 +222,13 @@ export default function MovieCard({ movie }: MovieCardProps) {
                     cursor: 'pointer',
                     fontSize: '13px',
                     fontWeight: isActive ? 600 : 400,
-                    color: isActive ? 'var(--color-gold)' : 'var(--color-text)',
-                    backgroundColor: isActive ? 'rgba(212,175,55,0.12)' : 'transparent',
+                    color: isActive ? cfg.color : 'var(--color-text)',
+                    backgroundColor: isActive ? `${cfg.color}22` : 'transparent',
                     display: 'flex',
                     alignItems: 'center',
                     gap: '8px',
                     transition: 'all 150ms ease',
-                    boxShadow: isActive ? '0 0 8px rgba(212,175,55,0.25)' : 'none',
+                    boxShadow: isActive ? `0 0 8px ${cfg.color}44` : 'none',
                   }}
                   onMouseEnter={(e) => {
                     if (!isActive) e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.05)';
@@ -228,7 +240,7 @@ export default function MovieCard({ movie }: MovieCardProps) {
                   <span style={{ fontSize: '14px' }}>{cfg.icon}</span>
                   <span>{cfg.label}</span>
                   {isActive && (
-                    <span style={{ marginLeft: 'auto', fontSize: '10px', color: 'var(--color-gold)' }}>✓</span>
+                    <span style={{ marginLeft: 'auto', fontSize: '10px', color: cfg.color }}>✓</span>
                   )}
                 </button>
               );

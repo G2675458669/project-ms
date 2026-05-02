@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm view *)",
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Bash(node node_modules/.bin/next dev)",
+      "Bash(npx next *)",
+      "Read(//c/Users/DELL/AppData/Local/**)",
+      "Read(//c/Users/DELL/AppData/Roaming/**)",
+      "Bash(git rm *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(npx tsc *)",
+      "Bash(kill %1)",
+      "Bash(wait)",
+      "Bash(cmd //c \"set PATH=D:\\\\\\\\Programming\\\\\\\\project-ms\\\\\\\\node-portable\\\\\\\\node-v22.21.1-win-x64;%PATH% && cd /d D:\\\\\\\\Programming\\\\\\\\project-ms && npm run dev\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000)",
+      "Bash(curl -s http://localhost:3002)",
+      "WebSearch",
+      "Bash(curl *)",
+      "Bash(./node-portable/node-v22.21.1-win-x64/node.exe node_modules/.bin/next dev)",
+      "Bash(./node-portable/node-v22.21.1-win-x64/npm.cmd run *)",
+      "Bash(./node-portable/node-v22.21.1-win-x64/node.exe ./node_modules/next/dist/bin/next dev)"
+    ]
+  }
+}
