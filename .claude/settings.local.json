@@ -21,7 +21,11 @@
       "Bash(curl *)",
       "Bash(./node-portable/node-v22.21.1-win-x64/node.exe node_modules/.bin/next dev)",
       "Bash(./node-portable/node-v22.21.1-win-x64/npm.cmd run *)",
-      "Bash(./node-portable/node-v22.21.1-win-x64/node.exe ./node_modules/next/dist/bin/next dev)"
+      "Bash(./node-portable/node-v22.21.1-win-x64/node.exe ./node_modules/next/dist/bin/next dev)",
+      "Bash(./node-portable/node-v22.21.1-win-x64/node.exe --experimental-strip-types scripts/sync-posters.ts)",
+      "Bash(./node-portable/node-v22.21.1-win-x64/node.exe -e ' *)",
+      "WebFetch(domain:www.themoviedb.org)",
+      "Bash(node -e \"process.stdin.on\\('data',d=>{const j=JSON.parse\\(d\\);console.log\\(JSON.stringify\\(j.data[0],null,2\\).substring\\(0,3000\\)\\)}\\)\")"
     ]
   }
 }

@@ -31,6 +31,7 @@ const GENRE_STYLES: Record<string, { text: string; bg: string; border: string }>
 export default function MovieCard({ movie }: MovieCardProps) {
   const [hovered, setHovered] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [imgError, setImgError] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const { toggleMark, getMarkStatus } = useAppContext();
   const currentStatus = getMarkStatus(movie.id);
@@ -72,21 +73,26 @@ export default function MovieCard({ movie }: MovieCardProps) {
         backgroundColor: 'var(--color-surface)',
       }}>
         {/* 海报图片 */}
-        <img
-          src={movie.poster}
-          alt={movie.titleZh}
-          loading="lazy"
-          style={{
-            position: 'absolute',
-            inset: 0,
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            transition: 'filter 350ms ease, transform 350ms ease',
-            filter: hovered ? 'blur(4px) brightness(0.3)' : 'none',
-            transform: hovered ? 'scale(1.05)' : 'scale(1)',
-          }}
-        />
+        {!imgError && (
+          <img
+            src={movie.poster}
+            alt={movie.titleZh}
+            loading="lazy"
+            referrerPolicy="no-referrer"
+            onError={() => setImgError(true)}
+            suppressHydrationWarning
+            style={{
+              position: 'absolute',
+              inset: 0,
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              transition: 'filter 350ms ease, transform 350ms ease',
+              filter: hovered ? 'blur(4px) brightness(0.3)' : 'none',
+              transform: hovered ? 'scale(1.05)' : 'scale(1)',
+            }}
+          />
+        )}
         {/* 标题覆盖层（图片加载失败或悬停时可见） */}
         <div style={{
           position: 'absolute',
@@ -94,7 +100,7 @@ export default function MovieCard({ movie }: MovieCardProps) {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          background: hovered
+          background: (hovered || imgError)
             ? 'rgba(0,0,0,0.35)'
             : 'rgba(0,0,0,0.15)',
           transition: 'background 350ms ease',
@@ -109,8 +115,8 @@ export default function MovieCard({ movie }: MovieCardProps) {
             textShadow: '0 2px 12px rgba(0,0,0,0.8)',
             lineHeight: 1.6,
             letterSpacing: '2px',
-            opacity: hovered ? 1 : 0,
-            transform: hovered ? 'translateY(0)' : 'translateY(4px)',
+            opacity: (hovered || imgError) ? 1 : 0,
+            transform: (hovered || imgError) ? 'translateY(0)' : 'translateY(4px)',
             transition: 'opacity 350ms ease, transform 350ms ease',
           }}>
             {movie.titleZh}
