@@ -9,6 +9,7 @@ import MovieGrid from './MovieGrid';
 
 export default function HomeView() {
   const [keyword, setKeyword] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
   const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
   const allGenres = useMemo(() => getAllGenres(), []);
 
@@ -16,8 +17,8 @@ export default function HomeView() {
     let result = movies;
 
     // 关键词模糊匹配
-    if (keyword.trim()) {
-      const kw = keyword.trim().toLowerCase();
+    if (searchQuery.trim()) {
+      const kw = searchQuery.trim().toLowerCase();
       result = result.filter(m =>
         m.title.toLowerCase().includes(kw) ||
         m.titleZh.includes(kw)
@@ -32,7 +33,7 @@ export default function HomeView() {
     }
 
     return result;
-  }, [keyword, selectedGenres]);
+  }, [searchQuery, selectedGenres]);
 
   const handleGenreToggle = (genre: string) => {
     setSelectedGenres(prev =>
@@ -52,7 +53,7 @@ export default function HomeView() {
         marginBottom: '20px',
         flexWrap: 'wrap',
       }}>
-        <SearchBar value={keyword} onChange={setKeyword} />
+        <SearchBar value={keyword} onChange={setKeyword} onSearch={() => setSearchQuery(keyword)} />
         <GenreTags genres={allGenres} selected={selectedGenres} onToggle={handleGenreToggle} />
       </div>
       <MovieGrid movies={filteredMovies} />
