@@ -1,6 +1,20 @@
 /* src/app/globals.css */
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Alimama DongFangDaKai";
+  src: url("/fonts/AlimamaDongFangDaKai.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Alimama ShuHeiTi";
+  src: url("/fonts/AlimamaShuHeiTi.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
+
 :root {
   --color-bg: #0a0a0f;
   --color-surface: #12121a;
@@ -13,7 +27,30 @@
   --color-text-muted: #555555;
   --font-display: Georgia, 'Times New Roman', serif;
   --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-zh-title: "Alimama DongFangDaKai", "KaiTi", "STKaiti", serif;
+  --font-en-title: "Alimama ShuHeiTi", "Arial Black", "Helvetica", sans-serif;
   --radius-card: 12px;
+  --genre-drama: #e8b339;
+  --genre-crime: #e0524b;
+  --genre-action: #e85d2c;
+  --genre-scifi: #4da6ff;
+  --genre-war: #7a8c8d;
+  --genre-thriller: #a78bfa;
+  --genre-comedy: #f59e0b;
+  --genre-animation: #34d399;
+  --genre-fantasy: #c084fc;
+  --genre-romance: #f472b6;
+  --genre-horror: #ef4444;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 * {
