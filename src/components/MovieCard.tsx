@@ -302,7 +302,7 @@ export default function MovieCard({ movie }: MovieCardProps) {
               </span>
             );
           })}
-          <span style={{ fontSize: '11px', color: 'var(--color-text-muted)', marginLeft: 'auto' }}>
+          <span style={{ fontSize: '11px', color: 'var(--color-gold)', marginLeft: 'auto' }}>
             📅 {movie.releaseDate.slice(0, 4)}
           </span>
         </div>
