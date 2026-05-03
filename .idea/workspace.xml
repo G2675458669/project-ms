@@ -5,10 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="09089415-91e8-4ffd-b27c-86e0a717d0d6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.claude/CLAUDE.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.claude/settings.local.json" beforeDir="false" afterPath="$PROJECT_DIR$/.claude/settings.local.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/HomeView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/HomeView.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SearchBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SearchBar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/MovieGrid.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MovieGrid.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,7 +95,8 @@
       <workItem from="1777695895312" duration="50000" />
       <workItem from="1777695958884" duration="19697000" />
       <workItem from="1777731751357" duration="3821000" />
-      <workItem from="1777737009149" duration="1812000" />
+      <workItem from="1777737009149" duration="1930000" />
+      <workItem from="1777821731942" duration="357000" />
     </task>
     <servers />
   </component>

@@ -7,14 +7,36 @@ import SearchBar from './SearchBar';
 import GenreTags from './GenreTags';
 import MovieGrid from './MovieGrid';
 
+function seededShuffle<T>(arr: T[], seed: number): T[] {
+  const a = [...arr];
+  let s = seed;
+  for (let i = a.length - 1; i > 0; i--) {
+    s = (s * 16807 + 0) % 2147483647;
+    const j = s % (i + 1);
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function getDailySeed(): number {
+  const date = new Date().toISOString().split('T')[0]; // UTC date YYYY-MM-DD
+  let hash = 0;
+  for (let i = 0; i < date.length; i++) {
+    hash = ((hash << 5) - hash) + date.charCodeAt(i);
+    hash |= 0;
+  }
+  return hash;
+}
+
 export default function HomeView() {
   const [keyword, setKeyword] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
   const allGenres = useMemo(() => getAllGenres(), []);
+  const [shuffledMovies] = useState(() => seededShuffle(movies, getDailySeed()));
 
   const filteredMovies = useMemo(() => {
-    let result = movies;
+    let result = shuffledMovies;
 
     // 关键词模糊匹配
     if (searchQuery.trim()) {
@@ -33,7 +55,7 @@ export default function HomeView() {
     }
 
     return result;
-  }, [searchQuery, selectedGenres]);
+  }, [shuffledMovies, searchQuery, selectedGenres]);
 
   const handleGenreToggle = (genre: string) => {
     setSelectedGenres(prev =>

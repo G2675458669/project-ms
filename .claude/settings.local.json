@@ -1,17 +1,4 @@
 {
-  "hooks": {
-    "PostToolUse": [
-      {
-        "matcher": "ExitPlanMode",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "echo \"[HOOK] 计划模式已退出，请调用 Skill: save-optimization-plan 询问用户是否保存方案\""
-          }
-        ]
-      }
-    ]
-  },
   "permissions": {
     "allow": [
       "Bash(npm view *)",
@@ -38,7 +25,8 @@
       "Bash(./node-portable/node-v22.21.1-win-x64/node.exe --experimental-strip-types scripts/sync-posters.ts)",
       "Bash(./node-portable/node-v22.21.1-win-x64/node.exe -e ' *)",
       "WebFetch(domain:www.themoviedb.org)",
-      "Bash(node -e \"process.stdin.on\\('data',d=>{const j=JSON.parse\\(d\\);console.log\\(JSON.stringify\\(j.data[0],null,2\\).substring\\(0,3000\\)\\)}\\)\")"
+      "Bash(node -e \"process.stdin.on\\('data',d=>{const j=JSON.parse\\(d\\);console.log\\(JSON.stringify\\(j.data[0],null,2\\).substring\\(0,3000\\)\\)}\\)\")",
+      "Bash(./node-portable/node-v22.21.1-win-x64/node.exe node_modules/next/dist/bin/next dev)"
     ]
   }
 }
